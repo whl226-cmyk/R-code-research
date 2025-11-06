@@ -128,7 +128,7 @@ create_data_set <- function(base_location, sensor_data, month) {
   # 2️⃣ Remove rows where A and B differ by >30%
   before <- nrow(sensor_data)
   sensor_data <- sensor_data %>%
-    filter(abs(pm25_a - pm25_b) / ((pm25_a + pm25_b) / 2) <= 0.3)
+    filter(abs(pm25_a - pm25_b) / (max(pm25_a + pm25_b) <= 0.3)
   log_entries$removed_diff <- before - nrow(sensor_data)
   
   # 3️⃣ Remove rows where PM2.5 < 2
